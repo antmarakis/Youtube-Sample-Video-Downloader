@@ -2,6 +2,7 @@ import numpy as np
 import tensorflow as tf
 import youtube_dl
 import pafy
+import sys
 
 
 def Length(url):
@@ -13,8 +14,7 @@ def Length(url):
 
 
 
-f = open("videos/save.txt", "w")
-path = "train0_.tfrecord"
+path = sys.argv[1]
 for example in tf.python_io.tf_record_iterator(path):
     result = tf.train.Example.FromString(example)
     v_id = result.features.feature["video_id"].bytes_list.value[0].decode("utf-8")
@@ -35,7 +35,7 @@ for example in tf.python_io.tf_record_iterator(path):
         continue
 
 
-    f = open("videos/save.txt", "a")
+    f = open("save.txt", "a")
     tags_str = ','.join([str(t) for t in tags])
     f.write("{} [{}] [{}]\n".format(v_id, tags_str, meta['title'], meta['description']))
     f.close()
