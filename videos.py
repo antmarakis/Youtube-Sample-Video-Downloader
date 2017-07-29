@@ -13,7 +13,6 @@ def Length(url):
         return -1
 
 
-
 path = sys.argv[1]
 for example in tf.python_io.tf_record_iterator(path):
     result = tf.train.Example.FromString(example)
@@ -33,7 +32,6 @@ for example in tf.python_io.tf_record_iterator(path):
                 "https://www.youtube.com/watch?v={}".format(v_id), download=True)
     except:
         continue
-
 
     f = open("save.txt", "a")
     tags_str = ','.join([str(t) for t in tags])
